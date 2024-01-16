@@ -1,11 +1,11 @@
-import sys  # sys 모듈 임포트
-
 N = int(input())
-Num_List = [0] * N
+numbers = []
 
 for i in range(N):
-    Num_List[i] = int(sys.stdin.readline().strip()) 
+    num = int(input())
+    numbers.append(num)
 
-Num_List.sort()
-for n in Num_List:
-    print(n)
+numbers.sort()
+
+for i in range(N):
+    print(numbers[i], end = '\n')
