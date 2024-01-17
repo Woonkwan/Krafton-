@@ -1,44 +1,33 @@
 import sys
-input = sys.stdin.readline
-
-
 from collections import deque
 
 
-q = deque()
+input = sys.stdin.readline
 
-n=int(input())
+N = int(input().strip())
 
-for i in range(n): #n번 반복
-    n=list(input().split())
-    if len(n)==2: #push인 경우
-        q.append(n[1])
+Q = deque()
+
+for _ in range(N):
+    command = input().split()
+
+    if len(command) == 2:  
+        Q.append(command[1])
+    
+    elif command[0] == 'pop':
+        if len(Q) == 0:
+            print(-1)
+        else:
+            print(Q.popleft())
+    
+    elif command[0] == 'size':
+        print(len(Q))  
+    
+    elif command[0] == 'empty':
+        print(1 if len(Q) == 0 else 0)
+    
+    elif command[0] == 'front':
+        print(Q[0] if Q else -1)
         
-    elif n[0]=='pop':
-        if len(q)==0:
-            print(-1)
-        else:
-            help=q.popleft()
-            print(help)
-            
-    elif n[0]=='size':
-        print(len(q))
-        
-    elif n[0]=='empty':
-        if len(q)==0:
-            print(1)
-        else:
-            print(0)
-            
-    elif n[0]=='front':
-        if len(q)==0:
-            print(-1)
-        else:
-            print(q[0])
-
-    elif n[0]=='back':
-        if len(q)==0:
-            print(-1)
-        else:
-            print(q[-1])
-
+    elif command[0] == 'back':
+        print(Q[-1] if Q else -1)
