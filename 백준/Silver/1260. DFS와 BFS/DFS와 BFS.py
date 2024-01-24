@@ -1,43 +1,41 @@
 from collections import deque
-
-def dfs(graph, v, visited1):
-    visited1[v] = True
-    print(v, end=' ')  # 방문한 노드 출력
-
+#========================================
+def dfs(graph, v, visited_dfs):
+    visited_dfs[v] = True
+    print(v, end = " ")
     for i in graph[v]:
-        if not visited1[i]:
-            dfs(graph, i, visited1)
-
-#---------------------------------------------------------------
-def bfs(graph, v, visited2):
+        if not visited_dfs[i]:
+            dfs(graph, i, visited_dfs)
+#========================================
+def bfs(graph, v, visited_bfs):
 
     q = deque([v])
 
-    while q:
-        v = q.popleft()
-        if not visited2[v]:
-            visited2[v] = True
-            print(v, end=" ")
-            for i in graph[v]:
-                if not visited2[i]:
+    while q:    
+        A = q.popleft()
+        if not visited_bfs[A]:
+            visited_bfs[A] = True
+            print(A, end = " ")
+            for i in graph[A]:
+                if not visited_bfs[i]:
                     q.append(i)
 
-#---------------------------------------------------------------
-N, M, V = map(int, input().split())
 
-graph = [[] for _ in range(N + 1)]      # 그래프 생성
-visited1 = [False] * (N + 1)             # 방문 여부를 저장하는 리스트
-visited2 = [False] * (N + 1)  
 
-for _ in range(M):
-    x, y = map(int, input().split())
+#========================================입출력 및 그래프 생성, 정렬 부문
+N, M ,V = map(int, input().split())
+graph = [[] for i in range(N+1)]
+visited_dfs = [False] * (N+1)
+visited_bfs = [False] * (N+1)
+
+for i in range(M):
+    x,y = map(int, input().split())
     graph[x].append(y)
-    graph[y].append(x)               # 무방향 그래프라면 양방향으로 추가
+    graph[y].append(x)
 
-# 각 노드의 인접 리스트를 오름차순으로 정렬
-for i in range(1, N + 1):
+for i in range(1, N+1):
     graph[i].sort()
 
-dfs(graph, V, visited1)  # DFS 시작
+dfs(graph, V, visited_dfs)
 print()
-bfs(graph, V, visited2)  # BFS 시작
+bfs(graph, V, visited_bfs)
