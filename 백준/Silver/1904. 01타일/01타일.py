@@ -11,5 +11,5 @@ def ans(N):
     return b
 
 
-N = int(input().strip())
+N = int(input().strip())%47244
 print(ans(N))
