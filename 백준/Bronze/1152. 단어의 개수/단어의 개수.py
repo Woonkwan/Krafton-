@@ -1,5 +1,9 @@
-import sys
-input = sys.stdin.readline
+n = input().strip()  
 
-X = input().split()
-print(len(X))
+
+if (len(n)>0):
+    count = n.count(' ') + 1 
+else:
+    count = 0  
+
+print(count)
